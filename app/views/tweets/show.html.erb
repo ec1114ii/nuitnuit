@@ -1,0 +1,114 @@
+<%= stylesheet_link_tag 'show', :media => "all" %>
+<header6>
+  <div class="container">
+    <blockquote>Posting Details
+    <span>&mdash; nuit nuit
+    </span>
+    </blockquote>
+  </div>
+</header6>
+<div class="b14">
+<div class="tweet1">
+  <div class="tweet2">
+  <p><%= image_tag @tweet.image_url, size: "400px*600px" if @tweet.image?%></p>
+  </div>
+  <p><%= @tweet.body %></p>
+  <p><%= @tweet.place %></p>
+  <p><%= @tweet.created_at %></p>
+    <% if user_signed_in? %>
+      <% if current_user.already_liked?(@tweet) %>
+        <%= button_to tweet_like_path(@tweet), method: :delete do %>
+          <i class="fas fa-heart"></i><%= @tweet.likes.count %>
+        <% end %>
+      <% else %>
+        <%= button_to tweet_likes_path(@tweet), method: :post do %>
+          <i class="far fa-heart"></i><%= @tweet.likes.count %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <i class="far fa-heart"></i><%= @tweet.likes.count %>
+    <% end %>
+<div class="comment-wrapper">
+  <p>コメント一覧</p>
+  <% @comments.each do |c| %>
+    <div>
+      <%= c.user.name unless c.user.blank? %>
+      <br>
+      <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@tweet, @comment], local: true) do |f| %>
+      <%= f.text_field :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+  <%= link_to "再投稿", edit_tweet_path(@tweet.id), class:"btn-vertical-border" %>
+</div>
+
+<div class="b30">
+<h2>いいねしたユーザー</h2>
+<% @tweet.liked_users.each do |user| %>
+  <li><%= user.name %></li>
+<% end %>
+
+<div class="basyo">
+<div id="display">投稿された場所</div>
+<div id='map'></div>
+
+<style>
+#map {
+  height: 600px;
+  width: 200px;
+  text-aligen:center;
+}
+</style>
+
+<script>
+let map
+let geocoder
+
+const display = document.getElementById('display')
+
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: , lng:-73.9653},
+    zoom:18,
+  });
+
+  marker = new google.maps.Marker({
+    position:  {lat: , lng:-73.9653},
+    map: map
+  });
+}
+
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+
+      display.textContent = "検索結果：" + results[ 0 ].geometry.location
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLEMAP_API_KEY']%>&callback=initMap" async defer></script>
+</div>
+</div>
+</div>

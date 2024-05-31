@@ -1,0 +1,139 @@
+* { box-sizing:border-box; 
+}
+
+.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+  
+  .bar:before, .bar:after {
+    content: '';
+    height: 2px; 
+    width: 0;
+    bottom: 1px; 
+    position: absolute;
+    background: #4a89dc; 
+    transition: all 0.2s ease;
+  }
+  
+  .bar:before { left: 50%; }
+  
+  .bar:after { right: 50%; }
+  
+  .group { 
+    position: relative; 
+    margin-bottom: 45px; 
+  }
+
+
+
+.blank1{
+    color: #999; 
+    font-size: 18px;
+    font-weight: normal;
+  font-family: Helvetica;
+  background: #eee;
+  -webkit-font-smoothing: antialiased;
+display: flex;
+justify-content: center;
+align-items: center;
+// background: #8c88cb;
+background-size: cover;
+width: 100%;
+// height: 1000px;
+ }
+
+ .blank2 {
+    width: 380px;
+    margin: 4em auto;
+    padding: 3em 2em 2em 2em;
+    background: #fafafa;
+    border: 1px solid #ebebeb;
+    box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+  }
+
+// .blank2{
+// text-align: center;
+// width: 50%;
+// color: white;
+// background: #030120;
+// border-radius: 15px;
+// margin: 30px 5px;
+// padding: 30px 40px;
+// }
+
+// /* ここから下は、こだわりポイント！
+// どこの aタグ(リンク使うときのタグ)なのかわからんから、.class名スペースaとする */
+
+.blank2 a{
+color:#212020;
+}
+
+// // fieldクラスのlabel
+
+// .field label{
+// font-weight: 100;
+// font-size: 15px;
+// color:#c6dab4
+// }
+
+// /* 場合に応じて入力する場所の大きさ変えたいよね！その場合は、.class名スペースinputで差別化する！
+// passwardの枠だけでかくしたかったらどうしたらいいかな？？ */
+
+// /* input要素は入力フォームについて変更を加えたい時に使うよ！ */
+// // fieldクラスのinput(文字を入力するところ)
+
+.field input[type="email"] {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    background: #fafafa;
+    color: #636363;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #757575;
+ }
+
+ .field input[type="email"]:focus { outline: none; }
+
+.field input[type="password"] {
+font-size: 18px;
+padding: 10px 10px 10px 5px;
+display: block;
+background: #fafafa;
+color: #636363;
+width: 100%;
+border: none;
+border-radius: 0;
+border-bottom: 1px solid #757575;
+}
+
+
+
+.actions input[type="submit"] {
+    position: relative;
+    display: inline-block;
+    padding: 12px 20px;
+    margin: .3em 0 1em 0;
+    width: 100px;
+    vertical-align: middle;
+    color: #605f5f;
+    font-size: 16px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    letter-spacing: 0px;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid #54565a;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.actions input[type="submit"]:hover {
+cursor: pointer;
+background: linear-gradient(to bottom,#cdcecf,#0c0c0cf3);
+
+}

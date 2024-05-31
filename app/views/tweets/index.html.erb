@@ -1,0 +1,59 @@
+<%= stylesheet_link_tag 'index', :media => "all" %>
+<header2>
+  <div class="container">
+    <blockquote>List of all messages
+    <span>&mdash; nuit nuit
+    </span>
+    </blockquote>
+  </div>
+</header2>
+<div class="b10">
+ <%= form_tag({controller:"tweets",action:"index"}, method: :get) do %>
+ <div class="nice wrap">
+   <%= text_field_tag :search %>
+   <%= submit_tag '検索する'  %>
+   </div>
+<% end %>
+<div class="re">
+<%= page_entries_info @tweets %>
+<%= paginate @tweets %>
+</div>
+<div class="tweets-container">
+  <% @tweets.each do |t| %>
+  <p><%= image_tag t.user.image_url, size: "100x100", class: "gazoupro" if t.user.image? %></p>
+    <div class="tweet">
+      <%= t.user.name %>
+      <br>
+      <div class="b12">
+      <%= t.body %>
+      </div>
+      <%= t.place %><% if user_signed_in? %>
+
+      <% if current_user.already_liked?(t) %>
+          <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
+              <i class="fas fa-heart"></i><%= t.likes.count %>
+          <% end %>
+      <% else %>
+          <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post do %>
+              <i class="far fa-heart"></i><%= t.likes.count %>
+          <% end %>
+      <% end %>
+  <% else %>
+      <i class="far fa-heart"></i><%= t.likes.count %>
+  <% end %>
+<% if user_signed_in? %>
+  <%= link_to "マイページへ", user_path(current_user.id), class:"btn-stitch" %>
+<% end %>
+<div class="b11">
+      <%= image_tag t.image_url, size: "250x200" if t.image? %>
+      <br>
+      <%= link_to "詳細へ", tweet_path(t.id), class:"btn-sticky" %>
+            <% if user_signed_in? && current_user.id == t.user_id %>
+            <%= link_to "編集する", edit_tweet_path(t.id), class:"btn-sticky" %>
+            <%= link_to "削除する", tweet_path(t.id), method: :delete , class:"btn-sticky" %>
+          <% end %>
+    </div>
+    </div>
+  <% end %>
+</div>
+</div>

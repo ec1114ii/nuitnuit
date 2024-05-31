@@ -1,0 +1,229 @@
+.b14{
+    background-image: url(https://cdn.pixabay.com/photo/2016/02/13/12/26/aurora-1197753_1280.jpg);
+    background-size: cover;
+    margin-top: -34px;
+}
+.tweet1{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    font-family: "Aoboshi One", serif;
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+}
+h2 {
+    position: relative;
+    padding: 0.25em 0;
+  }
+  h2:after {
+    content: "";
+    display: block;
+    height: 4px;
+    background: -webkit-linear-gradient(to right, rgb(21, 41, 188), #ffb2b2);
+    background: linear-gradient(to right, rgb(21, 41, 188), #ffb2b2);
+  }
+.basyo{
+    margin-top: 50px;
+}
+.b30{
+    text-align: center;
+    margin: 50px auto;
+    width: 45%;
+    text-align: center;
+    position: relative;
+    top: 50px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
+    margin-top: -50px;
+}
+.btn-vertical-border {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    padding: 5px 11px 5px 15px;
+    text-decoration: none;
+    color: #67c5ff;
+    transition: .4s;
+  }
+  
+  .btn-vertical-border:before {
+    position: absolute;
+    display: inline-block;
+    content: '';
+    width: 4px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 3px;
+    background:#67c5ff;
+  }
+  
+  .btn-vertical-border:after {
+    position: absolute;
+    display: inline-block;
+    content: '';
+    width: 4px;
+    height: 100%;
+    top:0;
+    left: 100%;
+    border-radius: 3px;
+    background:#67c5ff;
+  }
+  
+  .btn-vertical-border:hover:before, .btn-vertical-border:hover:after {
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg);
+  }
+.tweet2{
+    text-align: center;
+}
+$base-duration: 500ms;
+
+$color-3: #04284e;
+
+.container {
+  position: relative;
+  display: block;
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+header6 {
+  position: relative;
+  display: block;
+  // align-items: center;
+  // justify-content: center;
+  width: 100%;
+  height: 90vh;
+  margin: 0;
+  padding: 20px 0 0;
+  overflow: hidden;
+  z-index: 0;
+  
+  &:before, &:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  &:before {
+    background-color: rgba($color-3,0.8);
+    z-index: 0;
+  }
+  
+  &:after {
+    filter: blur(5px);
+    background-attachment: fixed;
+    background-image: url('https://cdn.pixabay.com/photo/2017/05/10/15/05/himalayas-2301040_1280.jpg');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: blur 10s linear infinite;
+    overflow: hidden;
+    z-index: -1;
+    
+    @keyframes blur {
+      0%   { filter: blur(1px); }
+      50%  { filter: blur(20px); }
+      100% { filter: blur(1px); }
+    }
+  }
+  
+  nav {
+    position: relative;
+    z-index: 2;
+    
+    .logo {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      margin: 0;
+      border-radius: 50%;
+      
+      svg {
+        position: absolute;
+        transform: scale(1);
+        animation: scale $base-duration * 1.5 ease-in-out;
+      }
+
+      @keyframes scale {
+        0%   { transform: scale(100);
+             opacity: 0; }
+        50%  { transform: scale(0.2); }
+        70%  { transform: scale(1); }
+        90%  { transform: scale(0.7); }
+        100% { transform: scale(1);
+             opacity: 1; }
+      }
+    }
+  }
+  blockquote { 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    margin: 0;
+    padding: 5px 0 5px 30px;
+    // border-left: 5px solid white;
+    color: white;
+    font-size: 40px;
+    font-weight: 100;
+    line-height: 1.25;
+    letter-spacing: 2px;
+    transform: translate(-50%,-50%);
+    animation: fadeIn $base-duration * 2.5 ease; 
+    
+    &:before {
+      position: absolute; 
+      content: '';
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background-color: white;
+      animation: height $base-duration * 2 ease-in-out;
+      
+      @keyframes height {
+        0%   { height: 0; }
+        100% { height: 100%; }
+      }
+    }
+    
+    @keyframes fadeIn {
+      0%   { 
+        opacity: 0;
+        transform: translate(-50%,-150%); 
+      }
+      
+      100% { 
+        opacity: 1;
+        transform: translateY(-50%,0%); 
+      }
+    }
+    
+//    @include media($med) {
+//      width: 70%;
+//    }
+    
+//    @include media($lg) {
+//      width: 60%;
+//    }
+    
+    span {
+      position: relative;
+      display: block;
+      margin: 20px 0 0;
+      font-size: 16px;
+    }
+  }
+}

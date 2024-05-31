@@ -1,0 +1,113 @@
+<%= stylesheet_link_tag 'new', :media => "all" %>
+<header3>
+  <div class="container">
+    <blockquote>New post
+    <span>&mdash; nuit nuit
+    </span>
+    </blockquote>
+  </div>
+</header3>
+<div class="background_test">
+
+<div class="whole">
+<%= form_for @tweet do |f| %>
+<div class="content">
+  <div class="b1">
+    <%= f.label :画像を追加 %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="b2">
+    <%= f.label :キャプションを追加  %>
+    <%= f.text_area :body, :size => "30x1" %>
+  </div>
+
+<div class="b3">
+    <%#%= f.label :場所を追加  %>
+    <%#%= f.text_field :place, :size => 30 %>
+  </div>
+
+<div class="b4">
+    <%= f.label :lat,"緯度" %>
+    <%= f.text_field :lat,:value =>"緯度", id: :lat %>
+    <%= f.label :lng,"経度" %>
+    <%= f.text_field :lng,:value =>"経度", id: :lng %>
+  </div>
+  <%= f.submit "投稿する",class:"btn-flat-vertical-border" %>
+<% end %>
+
+<div class="mapmap">
+
+
+
+<input id="address" type="textbox" value="">
+<input type="button" value="検索" onclick="codeAddress()">
+<div id='map'></div>
+
+<style>
+#map {
+  height: 500px;
+  width: 500px;
+}
+</style>
+
+<script>
+
+let map
+let marker
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center:  {lat: 35.6803997, lng:139.7690174},  //東京
+    zoom: 15,
+    
+  });
+}
+
+
+let geocoder
+let aft
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+        
+        
+        if (aft == true){
+            marker.setMap(null);
+        }
+
+        
+        map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            draggable: true	
+        });
+
+        
+        aft = true
+
+        
+        document.getElementById('lat').value = results[0].geometry.location.lat();
+        document.getElementById('lng').value = results[0].geometry.location.lng();
+
+        
+        google.maps.event.addListener( marker, 'dragend', function(ev){
+            
+            document.getElementById('lat').value = ev.latLng.lat();
+            document.getElementById('lng').value = ev.latLng.lng();
+        });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLEMAP_API_KEY']%>&callback=initMap" async defer></script>
+
+</div>
+</div>
+</div>
